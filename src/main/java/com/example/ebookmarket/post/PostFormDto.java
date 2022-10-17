@@ -19,4 +19,12 @@ public class PostFormDto {
 
     private String file;
 
+    public Post createPost(){
+        return Post.builder()
+                .title(title)
+                .content(content)
+                .writer(writer)
+                .build();
+    }
+
 }

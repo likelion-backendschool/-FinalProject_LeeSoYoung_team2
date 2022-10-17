@@ -15,7 +15,7 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
-    @GetMapping("")
+    @GetMapping("/create")
     public String postForm(Model model){
         model.addAttribute("postFormDto", new PostFormDto());
         return "post/postForm";
@@ -31,10 +31,16 @@ public class PostController {
         return "post/postList";
     }
 
-    @PostMapping("")
+    @PostMapping("/create")
     public String postCreate(PostFormDto postFormDto){
         postService.createPost(postFormDto);
-        return "redirect:/posts/list"
-;    }
+        return "redirect:/posts/list";
+    }
 
+    @GetMapping
+    public String postDelete(Long postId){
+        Post post = postService.getPostById(postId);
+        postService.deletePost(postId);
+        return "redirect:/posts/list";
+    }
 }
