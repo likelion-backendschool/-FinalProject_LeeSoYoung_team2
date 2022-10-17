@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,7 +23,13 @@ public class PostController {
 
     }
 
-
+    @GetMapping("/{postId}/modify")
+    public String postModifyForm(@PathVariable("postId") Long postId, Model model){
+        Post post = postService.getPostById(postId);
+        PostFormDto postFormDto = new PostFormDto();
+        model.addAttribute("postFormDto", postFormDto);
+        return "post/postModifyForm";
+    }
 
     @GetMapping("/list")
     public String postList(Model model){
@@ -37,8 +44,8 @@ public class PostController {
         return "redirect:/posts/list";
     }
 
-    @GetMapping
-    public String postDelete(Long postId){
+    @GetMapping("/{postId}/delete")
+    public String postDelete(@PathVariable("postId") Long postId){
         Post post = postService.getPostById(postId);
         postService.deletePost(postId);
         return "redirect:/posts/list";

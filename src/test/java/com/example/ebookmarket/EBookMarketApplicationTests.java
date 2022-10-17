@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
+
 @SpringBootTest
 class EBookMarketApplicationTests {
 
@@ -16,10 +18,18 @@ class EBookMarketApplicationTests {
     @Autowired
     private PostRepository postRepository;
     @Test
-    void testJpa(){
-        Post p1 = new Post();
-        p1.setContent("내용1");
-        this.postRepository.save(p1);
+    private void createSample() throws IOException {
+        Post post = null;
+        for(int i = 1; i <= 6; i++){
+            post=Post.builder()
+                    .title("title%s".formatted(i))
+                    .content("content%s".formatted(i))
+                    .writer("writer%s".formatted(i))
+                    .views(1*i)
+                    .build();
+            postRepository.save(post);
+
+        }
     }
 
 }
