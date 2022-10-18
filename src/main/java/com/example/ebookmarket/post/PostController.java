@@ -23,12 +23,12 @@ public class PostController {
 
     }
 
-    @GetMapping("/{postId}/modify")
+    @GetMapping("/modify/{postId}")
     public String postModifyForm(@PathVariable("postId") Long postId, Model model){
         Post post = postService.getPostById(postId);
         PostFormDto postFormDto = new PostFormDto();
         model.addAttribute("postFormDto", postFormDto);
-        return "post/postModifyForm";
+        return "post/postForm";
     }
 
     @RequestMapping(value="/list/{postId}")
