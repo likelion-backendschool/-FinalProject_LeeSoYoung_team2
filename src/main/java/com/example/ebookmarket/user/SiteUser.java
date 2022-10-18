@@ -6,9 +6,6 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Entity
 public class SiteUser {
     @Id
