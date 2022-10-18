@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @RequiredArgsConstructor
@@ -23,7 +24,13 @@ public class PostService {
     }
 
     public Post getPostById(Long postId) {
-        return postRepository.findById(postId).orElseThrow(()->new EntityNotFoundException());
+        Optional<Post> post = this.postRepository.findById(postId);
+        if(post.isPresent()){
+            return post.get();
+        }else{
+            throw new DataNotFoundException("question not found");
+        }
+
     }
 
     public void deletePost(Long postId) {

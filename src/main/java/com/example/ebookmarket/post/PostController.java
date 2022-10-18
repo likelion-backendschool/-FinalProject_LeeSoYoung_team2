@@ -31,10 +31,17 @@ public class PostController {
         return "post/postModifyForm";
     }
 
+    @RequestMapping(value="/list/{postId}")
+    public String detail(Model model, @PathVariable("postId") Long postId){
+        Post post = this.postService.getPostById(postId);
+        model.addAttribute("post",post);
+        return "post/postDetail";
+    }
+
     @GetMapping("/list")
     public String postList(Model model){
         List<Post> postList = this.postService.getPost();
-        model.addAttribute("postListList", postList);
+        model.addAttribute("postList", postList);
         return "post/postList";
     }
 
@@ -50,4 +57,5 @@ public class PostController {
         postService.deletePost(postId);
         return "redirect:/posts/list";
     }
+
 }

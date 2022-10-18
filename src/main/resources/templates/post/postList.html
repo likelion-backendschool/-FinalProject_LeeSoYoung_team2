@@ -7,6 +7,18 @@
 
 <th:bloack layout:fragment="content">
 
+        <div>
+            <div>제목</div>
+            <div>작성일시</div>
+        </div>
+        <th th:each="postList : ${postList}">
+            <div>
+                <p th:text="${postList.title}"></p>
+                <a th:href="@{|/posts/list/${postList.id}|}" th:text="${postList.content}"></a>
+            </div>
+<!--            <td th:text="${post.createDate}"></td>-->
+        </th>
+
 
 </th:bloack>
 
