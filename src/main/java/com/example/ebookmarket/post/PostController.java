@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.sql.SQLOutput;
 import java.util.List;
 
 @RequestMapping("/post")
@@ -28,15 +29,17 @@ public class PostController {
     @GetMapping("/{postId}/modify")
     public String postModifyForm(@PathVariable("postId") Long postId, Model model){
         Post post = postService.getPostById(postId);
-        PostModifyFormDto postModifyFormDto = new PostModifyFormDto();
-        model.addAttribute("postModifyFormDto", postModifyFormDto);
+        PostFormDto postFormDto = post.createPostFormDto();
+        model.addAttribute("postFormDto", postFormDto);
+
         return "post/postModifyForm";
     }
 
     @PostMapping("/{postId}/modify")
-    public String postModify(@Valid PostModifyFormDto postModifyFormDto, @PathVariable Long postId){
+    public String postModify(PostModifyFormDto postModifyFormDto, @PathVariable("postId") Long postId){
 
-        this.postService.modifyPost(postModifyFormDto, postId);
+        postService.modifyPost(postModifyFormDto, postId);
+        System.out.println("포스트id"+postId);
         return "redirect:/post/list";
     }
 

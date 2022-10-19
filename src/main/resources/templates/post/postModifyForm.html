@@ -1,7 +1,7 @@
 <html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content" class="container">
     <h5 class="my-3 border-bottom pb-2">질문수정</h5>
-    <form th:action="@{/post/modify}" method="post">
+    <form th:action="@{|/post/${postFormDto.id}/modify|}" th:object="${postModifyFormDto}" method="post">
         <div class="mb-3">
             <label for="subject" class="form-label">제목</label>
             <input type="text" name="subject" id="subject" class="form-control">

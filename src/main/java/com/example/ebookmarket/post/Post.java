@@ -30,5 +30,14 @@ public class Post {
     @ManyToOne
     private SiteUser siteUser;
 
-
+    public PostFormDto createPostFormDto() {
+        PostFormDto postFormDto = PostFormDto.builder()
+                .id(id)
+                .title(title)
+                .content(content)
+                .writer(writer)
+                .file(file)
+                .build();
+        return postFormDto;
+    }
 }

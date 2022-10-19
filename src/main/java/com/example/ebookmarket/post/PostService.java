@@ -38,9 +38,9 @@ public class PostService {
     }
 
     public void modifyPost(PostModifyFormDto postModifyFormDto, Long postId) {
+        System.out.println("포스트id"+postId);
         Post post = postRepository.findById(postId).orElseThrow(()->new EntityNotFoundException());
         post.setTitle(postModifyFormDto.getTitle());
         post.setContent(postModifyFormDto.getContent());
-
     }
 }
