@@ -10,8 +10,8 @@
 <h1 th:text="${post.id}"></h1>
 <div th:text="${post.content}"></div>
 <div class="my-3">
-    <a th:href="@{|/posts/modify/${post.id}|}" th:text="수정"></a>
-    <a th:href="@{|/posts/${post.id}/delete|}" th:text="삭제"></a>
+    <a th:href="@{|/post/${post.id}/modify|}" th:text="수정"></a>
+    <a th:href="@{|/post/${post.id}/delete|}" th:text="삭제"></a>
 </div>
 
 </th:bloack>

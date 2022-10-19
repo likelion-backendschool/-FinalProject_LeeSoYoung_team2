@@ -14,7 +14,7 @@
         <th th:each="postList : ${postList}">
             <div>
                 <p th:text="${postList.title}"></p>
-                <a th:href="@{|/posts/list/${postList.id}|}" th:text="${postList.content}"></a>
+                <a th:href="@{|/post/${postList.id}|}" th:text="${postList.content}"></a>
             </div>
 <!--            <td th:text="${post.createDate}"></td>-->
         </th>

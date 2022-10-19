@@ -16,12 +16,12 @@ import javax.validation.Valid;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/signup")
+    @GetMapping("/join")
     public String signup(UserCreateForm userCreateForm){
         return "signup_form";
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/join")
     public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "signup_form";
@@ -46,7 +46,7 @@ public class UserController {
             return "signup_form";
         }
 
-        return "redirect:/posts/list";
+        return "redirect:/post/list";
     }
 
     @GetMapping("/login")

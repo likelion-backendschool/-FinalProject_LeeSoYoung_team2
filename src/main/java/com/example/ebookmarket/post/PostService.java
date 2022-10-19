@@ -36,4 +36,11 @@ public class PostService {
     public void deletePost(Long postId) {
         postRepository.deleteById(postId);
     }
+
+    public void modifyPost(PostModifyFormDto postModifyFormDto, Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(()->new EntityNotFoundException());
+        post.setTitle(postModifyFormDto.getTitle());
+        post.setContent(postModifyFormDto.getContent());
+
+    }
 }
