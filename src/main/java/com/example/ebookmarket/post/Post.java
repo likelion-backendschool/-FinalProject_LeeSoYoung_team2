@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -17,11 +18,13 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private LocalDateTime createDate;
+
+    private LocalDateTime updateDate;
+
     private String title;
 
     private String content;
-
-    private String writer;
 
     private String file;
 
@@ -35,7 +38,6 @@ public class Post {
                 .id(id)
                 .title(title)
                 .content(content)
-                .writer(writer)
                 .file(file)
                 .build();
         return postFormDto;

@@ -14,7 +14,6 @@ public class PostModifyFormDto {
 
     private String content;
 
-    private String writer;
 
     private String file;
 
@@ -22,7 +21,6 @@ public class PostModifyFormDto {
         return Post.builder()
                 .title(title)
                 .content(content)
-                .writer(writer)
                 .build();
     }
 }

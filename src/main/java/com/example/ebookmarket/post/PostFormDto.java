@@ -15,15 +15,12 @@ public class PostFormDto {
 
     private String content;
 
-    private String writer;
-
     private String file;
 
     public Post createPost(){
         return Post.builder()
                 .title(title)
                 .content(content)
-                .writer(writer)
                 .build();
     }
 
