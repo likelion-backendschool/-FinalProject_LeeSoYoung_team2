@@ -24,7 +24,6 @@ class EBookMarketApplicationTests {
             post=Post.builder()
                     .title("title%s".formatted(i))
                     .content("content%s".formatted(i))
-                    .writer("writer%s".formatted(i))
                     .views(1*i)
                     .build();
             postRepository.save(post);
