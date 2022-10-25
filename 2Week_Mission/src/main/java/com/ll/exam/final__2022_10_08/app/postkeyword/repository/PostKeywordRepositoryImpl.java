@@ -23,7 +23,7 @@ public class PostKeywordRepositoryImpl implements PostKeywordRepositoryCustom {
                 .innerJoin(postTag)
                 .on(postKeyword.eq(postTag.postKeyword))
                 .where(postTag.member.id.eq(authorId))
-                .orderBy(postTag.post.id.desc())
+                //.orderBy(postTag.post.id.desc())
                 .groupBy(postKeyword.id)
                 .fetch();
 
