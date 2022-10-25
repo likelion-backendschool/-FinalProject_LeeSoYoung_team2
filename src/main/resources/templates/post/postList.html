@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      layout:decorate="~{layout}">
+
+<th:bloack layout:fragment="content">
+
+        <div>
+            <div>제목</div>
+            <div>작성일시</div>
+        </div>
+        <th th:each="postList : ${postList}">
+            <div>
+                <p th:text="${postList.title}"></p>
+                <a th:href="@{|/post/${postList.id}|}" th:text="${postList.content}"></a>
+            </div>
+<!--            <td th:text="${post.createDate}"></td>-->
+        </th>
+
+
+</th:bloack>
+
+</html>
