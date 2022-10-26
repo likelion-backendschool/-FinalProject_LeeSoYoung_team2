@@ -3,6 +3,8 @@ package com.ll.exam.final__2022_10_08.app.base.initData;
 import com.ll.exam.final__2022_10_08.app.cart.service.CartService;
 import com.ll.exam.final__2022_10_08.app.member.entity.Member;
 import com.ll.exam.final__2022_10_08.app.member.service.MemberService;
+import com.ll.exam.final__2022_10_08.app.order.entity.Order;
+import com.ll.exam.final__2022_10_08.app.order.service.OrderService;
 import com.ll.exam.final__2022_10_08.app.post.service.PostService;
 import com.ll.exam.final__2022_10_08.app.product.entity.Product;
 import com.ll.exam.final__2022_10_08.app.product.service.ProductService;
@@ -10,6 +12,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+
+import java.util.List;
 
 @Configuration
 @Profile({"dev", "test"})
@@ -21,9 +25,24 @@ public class NotProdInitData {
             MemberService memberService,
             PostService postService,
             ProductService productService,
-            CartService cartService
+            CartService cartService,
+            OrderService orderService
 
     ) {
+        class Helper {
+            public Order order(Member member, List<Product> products) {
+                for (int i = 0; i < products.size(); i++) {
+                    Product product = products.get(i);
+
+                    cartService.addItem(member, product);
+                }
+
+                return orderService.createFromCart(member);
+            }
+        }
+
+        Helper helper = new Helper();
+
         return args -> {
             if (initDataDone) {
                 return;
