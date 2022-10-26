@@ -38,7 +38,7 @@ public class Order extends BaseEntity {
         int payPrice = 0;
 
         for (OrderItem orderItem : orderItems) {
-            payPrice += orderItem.getPayPrice();
+            payPrice += orderItem.getSalePrice();
         }
 
         return payPrice;

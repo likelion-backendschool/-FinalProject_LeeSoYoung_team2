@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -81,5 +82,17 @@ public class OrderService {
 
         order.setRefundDone();
         orderRepository.save(order);
+    }
+
+    public Optional<Order> findForPringById(long id){
+        return findById(id);
+    }
+
+    public Optional<Order> findById(long id){
+        return orderRepository.findById(id);
+    }
+
+    public boolean actorCanSee(Member actor, Order order){
+        return actor.getId().equals(order.getBuyer().getId());
     }
 }
