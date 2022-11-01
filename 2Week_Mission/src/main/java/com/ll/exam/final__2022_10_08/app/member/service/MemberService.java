@@ -6,6 +6,7 @@ import com.ll.exam.final__2022_10_08.app.cash.CashLog;
 import com.ll.exam.final__2022_10_08.app.cash.CashService;
 import com.ll.exam.final__2022_10_08.app.email.service.EmailService;
 import com.ll.exam.final__2022_10_08.app.emailVerification.service.EmailVerificationService;
+import com.ll.exam.final__2022_10_08.app.member.entity.AuthLevel;
 import com.ll.exam.final__2022_10_08.app.member.entity.Member;
 import com.ll.exam.final__2022_10_08.app.member.exception.AlreadyJoinException;
 import com.ll.exam.final__2022_10_08.app.member.repository.MemberRepository;
@@ -14,6 +15,7 @@ import com.ll.exam.final__2022_10_08.util.Ut;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,6 +29,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 @Transactional(readOnly = true)
 public class MemberService {
     private final MemberRepository memberRepository;
@@ -46,11 +49,18 @@ public class MemberService {
                 .password(passwordEncoder.encode(password))
                 .email(email)
                 .nickname(nickname)
+                .authLevel(AuthLevel.NORMAL)
                 .build();
 
         memberRepository.save(member);
 
-        emailVerificationService.send(member);
+        emailVerificationService.send(member)
+                .addCallback(
+                        sendRsData -> {
+                            // 성공시 처리
+                        },
+                        error -> log.error(error.getMessage())
+                );
 
         return member;
     }

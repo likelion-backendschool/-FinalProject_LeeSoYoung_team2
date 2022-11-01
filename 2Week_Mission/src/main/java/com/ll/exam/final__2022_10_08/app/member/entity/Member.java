@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,9 @@ public class Member extends BaseEntity {
     private boolean emailVerified;
     private long restCash;
     private String nickname;
+
+    @Convert(converter = AuthLevel.Converter.class)
+    private AuthLevel authLevel;
 
     public String getName() {
         if (nickname != null) {
