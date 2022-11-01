@@ -12,4 +12,7 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     boolean existsByBuyerIdAndProductId(long buyerId, long productId);
 
     List<CartItem> findAllByBuyerId(long buyerId);
+
+    List<CartItem> findAllByBuyerIdAndProductIdIn(long buyerId, long[] productIds);
+
 }

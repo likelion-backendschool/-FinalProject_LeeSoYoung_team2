@@ -25,20 +25,28 @@
                 <div class="badge badge-outline">
                     <i class="fa-solid fa-pen"></i>
                     <span class="ml-2"
-                          th:text="${#temporals.format(post.createDate, 'yy-MM-dd HH:mm')}"></span>
+                          th:text="${#temporals.format(post.createDate, 'yy-MM-dd')}"></span>
                 </div>
             </div>
             <div th:if="${post.createDate != post.modifyDate}" class="flex justify-end">
                 <div class="badge">
                     <i class="fa-solid fa-eraser"></i>
                     <span class="ml-2"
-                          th:text="${#temporals.format(post.modifyDate, 'yy-MM-dd HH:mm')}"></span>
+                          th:text="${#temporals.format(post.modifyDate, 'yy-MM-dd')}"></span>
                 </div>
             </div>
             <div class="card-actions justify-end">
-                <a th:href="@{|/post/${post.id}|}" class="btn btn-sm">
-                    <i class="fa-solid fa-eye"></i>
-                    <span class="ml-2">보기</span>
+                    <a href="javascript:;" onclick="$(this).next().submit();" class="btn btn-sm"
+                       th:classappend="${product.extra_actor_hasInCart ? 'btn-disabled' : ''}">
+                        <i class="fa-solid fa-cart-plus"></i>
+                        <span class="ml-2">장바구니</span>
+                    </a>
+
+                    <form th:action="@{|/cart/addItem/${product.id}|}" method="POST"></form>
+
+                    <a th:href="@{|/product/${product.id}|}" class="btn btn-sm">
+                        <i class="fa-solid fa-eye"></i>
+                        <span class="ml-2">보기</span>
                 </a>
             </div>
         </div>

@@ -31,29 +31,30 @@ public class OrderItem extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     private Product product;
 
-    private int price;
-    private int salePrice;
-    private int wholesalePrice;
-    private int pgFee;
-    private int payPrice;
-    private int refundPrice;
-    private boolean isPaid;
+    // 가격
+    private int price; // 권장판매가
+    private int salePrice; // 실제판매가
+    private int wholesalePrice; // 도매가
+    private int pgFee; // 결제대행사 수수료
+    private int payPrice; // 결제금액
+    private int refundPrice; // 환불금액
+    private boolean isPaid; // 결제여부
 
-    public OrderItem(Product product){
+    public OrderItem(Product product) {
         this.product = product;
         this.price = product.getPrice();
         this.salePrice = product.getSalePrice();
         this.wholesalePrice = product.getWholesalePrice();
     }
 
-    public void setPaymentDone(){
+    public void setPaymentDone() {
         this.pgFee = 0;
         this.payPrice = getSalePrice();
         this.isPaid = true;
         this.payDate = LocalDateTime.now();
     }
 
-    public void setRefundDone(){
+    public void setRefundDone() {
         this.refundPrice = payPrice;
     }
 }
